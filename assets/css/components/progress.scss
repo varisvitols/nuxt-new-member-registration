@@ -1,0 +1,69 @@
+@import '~assets/css/variables.scss';
+  
+.progress {
+  display: flex;
+  width: 600px;
+  margin: 0 auto;
+
+  .progress__item {
+    width: 200px;
+    text-align: center;
+    position: relative;
+
+    &--done {
+      .progress__item-number {
+        background-color: $blue15;
+      }
+
+      &::before {
+        background-color: $blue15 !important;
+      }
+    }
+
+    &--active {
+      .progress__item-number {
+        background-color: $light-gray;
+        color: $blue15;
+        border-color: $blue15;
+      }
+
+      &::before {
+        background-color: $blue15 !important;
+      }
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      background-color: #B2B2B2;
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      top: 25px;
+      z-index: -1;
+      left: -50%;
+    }
+
+    &:first-child {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .progress__item-number {
+    display: inline-block;
+    font: normal normal 900 28px/52px Roboto;
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    color: $white;
+    background-color: $almost-gray;
+    border: 2px solid transparent;
+    
+  }
+  .progress__item-text{
+    font: normal normal normal 20px/26px Roboto;
+    color: $dark;
+  }
+}

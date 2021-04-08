@@ -1,5 +1,13 @@
-@import 'normalize.css';
+/**
+ * Global SCSS variables
+*/
 @import '~assets/css/variables.scss';
+
+
+/**
+ * Global styles
+*/
+@import 'normalize.css';
 
 body {
   background-color: $light-gray;
@@ -25,3 +33,9 @@ body {
   font-weight: 900;
   font-style: normal;
 }
+
+
+/**
+ * Pages and components
+*/
+@import '~assets/css/components/progress.scss';
