@@ -1,0 +1,18 @@
+@import '~assets/css/variables.scss';
+
+.page {
+  width: 490px;
+  margin: 0 auto;
+  padding: 35px;
+  box-sizing: border-box;
+  background-color: $white;
+  border-radius: 13px;
+  box-shadow: 0px 3px 16px #0000001A;
+  margin-top: 40px;
+}
+
+.page__heading{
+  font: normal normal bold 34px/45px Roboto;
+  color: $blue15;
+  margin: 0;
+}

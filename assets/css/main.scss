@@ -22,6 +22,13 @@ body {
 
 @font-face {
   font-family: 'Roboto';
+  src: url('../fonts/Roboto-Medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
   src: url('../fonts/Roboto-Bold-webfont.woff') format('woff');
   font-weight: bold;
   font-style: normal;
@@ -39,3 +46,6 @@ body {
  * Pages and components
 */
 @import '~assets/css/components/progress.scss';
+@import '~assets/css/components/page.scss';
+@import '~assets/css/components/form.scss';
+@import '~assets/css/components/buttons.scss';
