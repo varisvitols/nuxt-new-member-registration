@@ -15,4 +15,10 @@
   text-align: center;
   border-radius: 8px;
   border: 2px solid $blue15;
+  margin-top: 20px;
+
+  &--inverse {
+    background-color: $white;
+    color: $blue15;
+  }
 }

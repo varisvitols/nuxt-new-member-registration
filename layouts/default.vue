@@ -18,6 +18,12 @@ export default Vue.extend({
     proceedToNextPage: function(data): void {
       //alert(data);
       console.log(data);
+      this.$router.push({
+        path: '/page2'
+      })
+      // this.$nuxt.$options.router.push({
+      //   path: '/page2'
+      // })
     }
   },
   mounted () {

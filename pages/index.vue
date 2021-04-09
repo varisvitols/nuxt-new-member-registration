@@ -1,7 +1,7 @@
 <template>
   <div class="page  page--personal">
     <h1 class="page__heading">Personal info</h1>
-    <div class="page__content">
+    <section class="page__content">
 
       <form class="data-form" action="">
         <div class="input-group">
@@ -22,7 +22,7 @@
         </div>
         <div class="input-group">
           <label for="email">Email</label>
-          <input type="text"
+          <input type="email"
             name="email" 
             id="email" 
             v-model="data.email"
@@ -45,9 +45,12 @@
           + Add phone
         </a>
       </form>
+    </section>
 
+    <footer class="page__buttons">
+      <!-- <NuxtLink class="button" to="/page2">Continue</NuxtLink> -->
       <button class="button" @click="onContinueTap">Continue</button>
-    </div>
+    </footer>
   </div>
 </template>
 
@@ -167,6 +170,7 @@ export default Vue.extend({
 
     onContinueTap: function(): void {
       this.$nuxt.$emit('continueClicked', 'continue data');
+
     }
   }
 })
@@ -183,7 +187,7 @@ export default Vue.extend({
     }
 
     .data-form {
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
   }
 </style>

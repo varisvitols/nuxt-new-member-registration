@@ -1,5 +1,11 @@
 @import '~assets/css/variables.scss';
 
+input:focus,
+select:focus,
+button:focus {
+    outline: none;
+}
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -8,11 +14,10 @@
   
   label {
     font: normal normal normal 18px/24px Roboto;
-    color: $dark;
     margin-bottom: 10px;
   }
 
-  input[type=text] {
+  input[type=text], input[type=email] {
     border: 2px solid $gray;
     border-radius: 8px;
     height: 45px;
@@ -36,6 +41,7 @@
 
     input[type=text] {
       width: 100%;
+      padding-left: 114px;
     }
   }
 
@@ -46,7 +52,6 @@
     width: 105px;
     height: 45px;
     font: normal normal normal 16px/18px Roboto;
-    color: $dark;
     padding: 12px 12px 12px 20px;
     border: 2px solid $gray;
     border-radius: 8px 0 0 8px;
@@ -63,5 +68,43 @@
       top: 19px;
       right: 17px;
     }
+  }
+}
+
+.radio-container {
+  display: block;
+  position: relative;
+  height: 45px;
+  padding-left: 65px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  font: normal normal normal 18px/45px Roboto;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked {
+      &~ .checkmark {
+        background-color: $blue15;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --%3E%3Cpath fill='%23FFF' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
+        background-size: 23px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 45px;
+    background-color: $white;
+    border-radius: 8px;
+    border: 2px solid $gray;
+    box-sizing: border-box;
   }
 }

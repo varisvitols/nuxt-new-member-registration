@@ -1,7 +1,10 @@
 @import '~assets/css/variables.scss';
 
 .page {
+  display: flex;
+  flex-direction: column;
   width: 490px;
+  min-height: 768px;
   margin: 0 auto;
   padding: 35px;
   box-sizing: border-box;
@@ -15,4 +18,8 @@
   font: normal normal bold 34px/45px Roboto;
   color: $blue15;
   margin: 0;
+}
+
+.page__buttons {
+  margin-top: auto;
 }
