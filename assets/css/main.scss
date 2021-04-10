@@ -18,6 +18,14 @@ strong {
   font-weight: bold;
 }
 
+a.link {
+  display: inline-block;
+  color: $blue15;
+  font: normal normal 500 18px/24px Roboto;
+  cursor: pointer;
+  padding: 5px 12px 5px 0;
+}
+
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Regular-webfont.woff') format('woff');
@@ -54,3 +62,4 @@ strong {
 @import '~assets/css/components/page.scss';
 @import '~assets/css/components/form.scss';
 @import '~assets/css/components/buttons.scss';
+@import '~assets/css/components/modal.scss';

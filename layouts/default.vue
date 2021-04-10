@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Modal v-if="displayModal" />
     <div class="container">
       <Progress />
       <Nuxt />
@@ -12,13 +13,21 @@ import Vue from 'vue'
 
 export default Vue.extend({
   data () {
-    return {}
+    const displayModal: boolean = false;
+
+    return {
+      displayModal
+    }
   },
-  // keeping to myself as a reference
-  // mounted () {
-  //   this.$nuxt.$on('continueClicked', (data) => {
-  //     console.log(data)
-  //   })
-  // }
+  mounted () {
+    this.$nuxt.$on('openEditModal', () => {
+      this.displayModal = true;
+      document.body.style.overflow = 'hidden';
+    }),
+    this.$nuxt.$on('closeEditModal', () => {
+      this.displayModal = false;
+      document.body.style.overflow = '';
+    })
+  }
 })
 </script>

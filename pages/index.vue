@@ -39,7 +39,7 @@
           />
         </div>
 
-        <a class="add-phone" 
+        <a class="link" 
           v-if="phoneTypesRemainingCount > 0"
           @click="onAddNewPhoneClick">
           + Add phone
@@ -75,22 +75,9 @@ export default Vue.extend({
       phone_other: 'Other'
     }
 
-    // const phoneTypesRemaining: object = {
-    //   phone_mobile: 'Mobile',
-    //   phone_main: 'Main',
-    //   phone_other: 'Other'
-    // }
-
-    // const phoneTypesSelected: object = {
-    //   phone_work: 'Work',
-    //   phone_home: 'Home'
-    // }
-
     return {
       //data,
-      allPhoneTypes,
-      // phoneTypesRemaining,
-      // phoneTypesSelected
+      allPhoneTypes
     }
   },
 
@@ -110,43 +97,43 @@ export default Vue.extend({
     //   // }
     // },
     first_name: {
-      get () { return this.$accessor.first_name },
+      get (): string { return this.$accessor.first_name },
       set (newData) { this.$accessor.updateFirstName(newData) }
     },
     last_name: {
-      get () { return this.$accessor.last_name },
+      get (): string { return this.$accessor.last_name },
       set (newData) { this.$accessor.updateLastName(newData) }
     },
     email: {
-      get () { return this.$accessor.email },
+      get (): string { return this.$accessor.email },
       set (newData) { this.$accessor.updateEmail(newData) }
     },
     phone_work: {
-      get () { return this.$accessor.phone_work },
+      get (): string { return this.$accessor.phone_work },
       set (newData) { this.$accessor.updatePhoneWork(newData) }
     },
     phone_home: {
-      get () { return this.$accessor.phone_home },
+      get (): string { return this.$accessor.phone_home },
       set (newData) { this.$accessor.updatePhoneHome(newData) }
     },
     phone_mobile: {
-      get () { return this.$accessor.phone_mobile },
+      get (): string { return this.$accessor.phone_mobile },
       set (newData) { this.$accessor.updatePhoneMobile(newData) }
     },
     phone_main: { 
-      get () { return this.$accessor.phone_main },
+      get (): string { return this.$accessor.phone_main },
       set (newData) { this.$accessor.updatePhoneMain(newData) }
     },
     phone_other: {
-      get () { return this.$accessor.phone_other },
+      get (): string { return this.$accessor.phone_other },
       set (newData) { this.$accessor.updatePhoneOther(newData) }
     },
     phoneTypesRemaining: {
-      get () { return this.$accessor.phoneTypesRemaining },
+      get (): object { return this.$accessor.phoneTypesRemaining },
       set (newData) { this.$accessor.updatePhoneTypesRemaining(newData) }
     },
     phoneTypesSelected: {
-      get () { return this.$accessor.phoneTypesSelected },
+      get (): object { return this.$accessor.phoneTypesSelected },
       set (newData) { this.$accessor.updatePhoneTypesSelected(newData) }
     }
   },

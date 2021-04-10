@@ -23,7 +23,7 @@ export const state = () => ({
   phone_mobile: '' as string,
   phone_main: '' as string,
   phone_other: '' as string,
-  membership: 1 as number,
+  membership: '1' as string,
   phoneTypesRemaining: {
     phone_mobile: 'Mobile',
     phone_main: 'Main',
@@ -87,7 +87,7 @@ export const mutations = mutationTree(state, {
   updatePhoneTypesSelected(state, newData: object) {
     state.phoneTypesSelected = newData
   },
-  updateMembership(state, newData: number) {
+  updateMembership(state, newData: string) {
     state.membership = newData
   }
 })
