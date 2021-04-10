@@ -6,7 +6,7 @@
       <form class="data-form" action="">
         <div class="radio-boxes">
           <label class="radio-container">Regular
-            <input type="radio" checked="checked" name="radio" 
+            <input type="radio" name="radio" 
               value="1" v-model="membership"
               @change="onMembershipChanged($event.target.value)">
             <span class="checkmark"></span>
@@ -30,30 +30,31 @@
     </section>
 
     <footer class="page__buttons">
-      <button class="button button--inverse" @click="$router.go(-1)">Back</button>
-      <button class="button" @click="onContinueTap">Continue</button>
+      <!-- <button class="button button--inverse" @click="$router.go(-1)">Back</button> -->
+      <NuxtLink class="button  button--nuxtlink  button--inverse" to="/">Back</NuxtLink>
+      <NuxtLink class="button  button--nuxtlink" to="/page3">Continue</NuxtLink>
     </footer>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default Vue.extend({
   data () {
-    const membership: number = 1
-
-    return {
-      membership
-    }
+    return {}
   },
+
+  computed: {
+    membership: {
+      get () { return this.$accessor.membership },
+      set (newData) { this.$accessor.updateMembership(newData) }
+    },
+  },
+
   methods: {
     onMembershipChanged: function(value: string): void {
       console.log('value', value);
-    },
-
-    onContinueTap: function(): void {
-      this.$nuxt.$emit('continueClicked', 'continue data');
     }
   }
 })

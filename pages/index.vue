@@ -9,7 +9,7 @@
           <input type="text"
             name="first_name" 
             id="first_name" 
-            v-model="data.first_name"
+            v-model="first_name"
           >
         </div>
         <div class="input-group">
@@ -17,7 +17,7 @@
           <input type="text"
             name="last_name" 
             id="last_name" 
-            v-model="data.last_name"
+            v-model="last_name"
           >
         </div>
         <div class="input-group">
@@ -25,7 +25,7 @@
           <input type="email"
             name="email" 
             id="email" 
-            v-model="data.email"
+            v-model="email"
           >
         </div>
         
@@ -48,26 +48,16 @@
     </section>
 
     <footer class="page__buttons">
-      <!-- <NuxtLink class="button" to="/page2">Continue</NuxtLink> -->
-      <button class="button" @click="onContinueTap">Continue</button>
+      <NuxtLink class="button  button--nuxtlink" to="/page2">Continue</NuxtLink>
+      <!-- <button class="button" @click="$router.push({ path: '/page2' })">Continue</button> -->
     </footer>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 import PhoneInput from '../components/PhoneInput.vue';
-
-export interface FormData {
-  first_name?: string,
-  last_name?: string,
-  email?: string,
-  phone_home?: string,
-  phone_work?: string,
-  phone_mobile?: string,
-  phone_main?: string,
-  phone_other?: string,
-}
+//import { FormData } from '../store';
 
 export default Vue.extend({
   components: {
@@ -75,7 +65,7 @@ export default Vue.extend({
   },
 
   data () {
-    const data: FormData = {}
+    //const data: FormData = {}
 
     const allPhoneTypes: object = {
       phone_work: 'Work',
@@ -85,32 +75,101 @@ export default Vue.extend({
       phone_other: 'Other'
     }
 
-    const phoneTypesRemaining: object = {
-      phone_mobile: 'Mobile',
-      phone_main: 'Main',
-      phone_other: 'Other'
-    }
+    // const phoneTypesRemaining: object = {
+    //   phone_mobile: 'Mobile',
+    //   phone_main: 'Main',
+    //   phone_other: 'Other'
+    // }
 
-    const phoneTypesSelected: object = {
-      phone_work: 'Work',
-      phone_home: 'Home'
-    }
+    // const phoneTypesSelected: object = {
+    //   phone_work: 'Work',
+    //   phone_home: 'Home'
+    // }
 
     return {
-      data,
+      //data,
       allPhoneTypes,
-      phoneTypesRemaining,
-      phoneTypesSelected
+      // phoneTypesRemaining,
+      // phoneTypesSelected
     }
   },
 
   computed: {
     phoneTypesRemainingCount: function(): number {
       return Object.keys(this.phoneTypesRemaining).length
+    },
+    // dataFromStore: function(){
+    //   console.log('getting data from store....');
+    //   // console.log('this.$accessor.FormData', this.$accessor.FormData)
+    //   return this.$accessor.formData
+    //   // get () {
+    //   //   return this.$accessor.formData
+    //   // },
+    //   // set (newData) {
+    //   //   this.$accessor.setFormData(newData)
+    //   // }
+    // },
+    first_name: {
+      get () { return this.$accessor.first_name },
+      set (newData) { this.$accessor.updateFirstName(newData) }
+    },
+    last_name: {
+      get () { return this.$accessor.last_name },
+      set (newData) { this.$accessor.updateLastName(newData) }
+    },
+    email: {
+      get () { return this.$accessor.email },
+      set (newData) { this.$accessor.updateEmail(newData) }
+    },
+    phone_work: {
+      get () { return this.$accessor.phone_work },
+      set (newData) { this.$accessor.updatePhoneWork(newData) }
+    },
+    phone_home: {
+      get () { return this.$accessor.phone_home },
+      set (newData) { this.$accessor.updatePhoneHome(newData) }
+    },
+    phone_mobile: {
+      get () { return this.$accessor.phone_mobile },
+      set (newData) { this.$accessor.updatePhoneMobile(newData) }
+    },
+    phone_main: { 
+      get () { return this.$accessor.phone_main },
+      set (newData) { this.$accessor.updatePhoneMain(newData) }
+    },
+    phone_other: {
+      get () { return this.$accessor.phone_other },
+      set (newData) { this.$accessor.updatePhoneOther(newData) }
+    },
+    phoneTypesRemaining: {
+      get () { return this.$accessor.phoneTypesRemaining },
+      set (newData) { this.$accessor.updatePhoneTypesRemaining(newData) }
+    },
+    phoneTypesSelected: {
+      get () { return this.$accessor.phoneTypesSelected },
+      set (newData) { this.$accessor.updatePhoneTypesSelected(newData) }
     }
   },
 
+  // watch: {
+  //   data: function(newData, oldData) {
+  //     console.log('data changed!')
+  //   }
+  // },
+
   methods: {
+    // setData(newData) {
+    //   this.$accessor.setFormData(newData)
+    // },
+
+    // onInputUpdate(){
+
+    // },
+
+    // onInputBlur(){
+    //   this.setData(this.data);
+    // },
+
     onPhoneTypeChange: function(oldName: string, newName: string): void {
       this.rewritePhoneTypesRemaining(oldName, newName);
       this.rewritePhoneTypesSelected(oldName, newName);
@@ -164,15 +223,20 @@ export default Vue.extend({
     },
 
     onPhoneNumberChange: function(inputName: string, value: string) :void {
-      this.data[inputName] = value;
-      //console.log(this.data);
-    },
-
-    onContinueTap: function(): void {
-      this.$nuxt.$emit('continueClicked', 'continue data');
-
+      this[inputName] = value
     }
-  }
+
+    // keeping to myself as a reference
+    // onContinueTap: function(): void {
+    //   this.$nuxt.$emit('continueClicked', 'continue data');
+    // }
+  },
+  mounted: function(){
+    console.log('mounted');
+    //window.alert('mounted');
+    // console.log('data from store, ', this.dataFromStore);
+    // this.data = { ...this.dataFromStore }
+  },
 })
 </script>
 

@@ -18,7 +18,8 @@
         {{ selectedTitle }}
       </div>
       <input type="text" 
-        :name="selectedValue" 
+        :name="selectedValue"
+        :value="phoneInputValue"
         @keyup="onInputKeyUp(selectedValue, $event.target.value)"
       >
     </div>
@@ -37,6 +38,12 @@ export default Vue.extend({
   data () {
     return {}
   },
+  computed: {
+    phoneInputValue(){
+      const value = this.$accessor[this.selectedValue];
+      return value
+    },
+  },
   methods: {
     onSelecboxValueChange: function(newName: string): void {
       const oldName = this.selectedValue;
@@ -44,7 +51,6 @@ export default Vue.extend({
     },
 
     onInputKeyUp: function(inputName: string, value: string): void {
-      //console.log(inputName, value);
       this.$emit('phoneNumberChanged', inputName, value);
     }
   }
