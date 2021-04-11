@@ -61,7 +61,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import PhoneInput from '../../components/PhoneInput.vue';
-import PersonalInfo from '../../types/PersonalInfo';
 
 export default Vue.extend({
   components: {
@@ -69,7 +68,7 @@ export default Vue.extend({
   },
 
   data () {
-    const data: PersonalInfo = {}
+    const data: { [property: string]: string } = {}
 
     const allPhoneTypes: { [property: string]: string } = {
       phone_work: 'Work',
@@ -107,7 +106,7 @@ export default Vue.extend({
   },
 
   created(){
-    this.data = { ...this.getPersonalInfo }
+    this.data = { ...this.getPersonalInfo as {} }
   },
 
   methods: {

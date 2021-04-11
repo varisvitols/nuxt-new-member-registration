@@ -73,12 +73,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import PersonalInfo from '../types/PersonalInfo';
 
 export default Vue.extend({
   data () {
     const displayModal: boolean = false;
-    const personalInfo: PersonalInfo = {}
+    const personalInfo: { [property: string]: string } = {}
 
     return {
       displayModal,
@@ -94,10 +93,10 @@ export default Vue.extend({
          return ''
       }
     },
-    phoneTypesRemaining(): { [property: string]: string } {
+    phoneTypesRemaining(): object {
       return this.$accessor.phoneTypesRemaining
     },
-    phoneTypesSelected(): { [property: string]: string } {
+    phoneTypesSelected(): object {
       return this.$accessor.phoneTypesSelected
     },
     membership: {
@@ -107,7 +106,7 @@ export default Vue.extend({
   },
 
   created(){
-    this.personalInfo = { ...this.getPersonalInfo }
+    this.personalInfo = { ...this.getPersonalInfo as {} }
   },
   
   mounted () {
@@ -150,7 +149,7 @@ export default Vue.extend({
     },
 
     refreshPersonalInfo(): void {
-      this.personalInfo = { ...this.getPersonalInfo }
+      this.personalInfo = { ...this.getPersonalInfo as {} }
     }
   }
 })

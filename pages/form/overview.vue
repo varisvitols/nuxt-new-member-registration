@@ -25,12 +25,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import PersonalInfo from '../../types/PersonalInfo';
 
 export default Vue.extend({
   data () {
     const processing: boolean = false;
-    const personalInfo: PersonalInfo = {}
+    const personalInfo: { [property: string]: string } = {}
 
     return {
       processing,
@@ -77,12 +76,12 @@ export default Vue.extend({
   },
 
   created(){
-    this.personalInfo = { ...this.getPersonalInfo }
+    this.personalInfo = { ...this.getPersonalInfo as {} }
   },
 
   mounted () {
     this.$nuxt.$on('closeEditModal', () => {
-      this.personalInfo = { ...this.getPersonalInfo }
+      this.personalInfo = { ...this.getPersonalInfo as {} }
     })
   },
 
