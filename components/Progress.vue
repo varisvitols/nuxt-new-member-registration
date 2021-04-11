@@ -25,9 +25,9 @@ export default Vue.extend({
   data () {
     const currentRouteName: string = 'index';
     const pathList: { [property: string]: number } = {
-      index: 1,
-      page2: 2,
-      page3: 3
+      'form-contact-info': 1,
+      'form-membership': 2,
+      'form-overview': 3
     }
     return {
       currentRouteName,

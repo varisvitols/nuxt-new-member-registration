@@ -17,7 +17,7 @@
 
     <footer class="page__buttons">
       <!-- <button class="button button--inverse" @click="$router.go(-1)">Back</button> -->
-      <NuxtLink class="button  button--nuxtlink  button--inverse" to="/page2">Back</NuxtLink>
+      <NuxtLink class="button  button--nuxtlink  button--inverse" to="/form/membership">Back</NuxtLink>
       <button class="button" @click="onSubmitClick" :class="{ 'button--disabled': processing }">Submit</button>
     </footer>
   </div>

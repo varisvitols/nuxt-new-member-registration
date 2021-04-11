@@ -28,8 +28,8 @@
 
     <footer class="page__buttons">
       <!-- <button class="button button--inverse" @click="$router.go(-1)">Back</button> -->
-      <NuxtLink class="button  button--nuxtlink  button--inverse" to="/">Back</NuxtLink>
-      <NuxtLink class="button  button--nuxtlink" to="/page3">Continue</NuxtLink>
+      <NuxtLink class="button  button--nuxtlink  button--inverse" to="/form/contact-info">Back</NuxtLink>
+      <NuxtLink class="button  button--nuxtlink" to="/form/overview">Continue</NuxtLink>
     </footer>
   </div>
 </template>
