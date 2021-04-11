@@ -1,17 +1,19 @@
 /**
  * Global SCSS variables
-*/
+ */
 @import '~assets/css/variables.scss';
 
 
 /**
  * Global styles
-*/
+ */
 @import 'normalize.css';
+
 
 body {
   background-color: $light-gray;
   color: $dark;
+  font: normal normal normal 18px/24px Roboto;
 }
 
 strong {
@@ -21,7 +23,7 @@ strong {
 a.link {
   display: inline-block;
   color: $blue15;
-  font: normal normal 500 18px/24px Roboto;
+  font-weight: 500;
   cursor: pointer;
   padding: 5px 12px 5px 0;
 }
@@ -31,6 +33,10 @@ a.link {
   padding-bottom: 91px;
 }
 
+
+/**
+ * Fonts
+ */
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Regular-webfont.woff') format('woff');

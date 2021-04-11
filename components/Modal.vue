@@ -74,58 +74,66 @@ export default Vue.extend({
   data () {
     return {}
   },
+
   computed: {
     first_name: {
       get (): string { return this.$accessor.first_name },
-      set (newData) { this.$accessor.updateFirstName(newData) }
+      set (newData: string) { this.$accessor.updateFirstName(newData) }
     },
     last_name: {
       get (): string { return this.$accessor.last_name },
-      set (newData) { this.$accessor.updateLastName(newData) }
+      set (newData: string) { this.$accessor.updateLastName(newData) }
     },
     email: {
       get (): string { return this.$accessor.email },
-      set (newData) { this.$accessor.updateEmail(newData) }
+      set (newData: string) { this.$accessor.updateEmail(newData) }
     },
     phone_work: {
       get (): string { return this.$accessor.phone_work },
-      set (newData) { this.$accessor.updatePhoneWork(newData) }
+      set (newData: string) { this.$accessor.updatePhoneWork(newData) }
     },
     phone_home: {
       get (): string { return this.$accessor.phone_home },
-      set (newData) { this.$accessor.updatePhoneHome(newData) }
+      set (newData: string) { this.$accessor.updatePhoneHome(newData) }
     },
     phone_mobile: {
       get (): string { return this.$accessor.phone_mobile },
-      set (newData) { this.$accessor.updatePhoneMobile(newData) }
+      set (newData: string) { this.$accessor.updatePhoneMobile(newData) }
     },
     phone_main: { 
       get (): string { return this.$accessor.phone_main },
-      set (newData) { this.$accessor.updatePhoneMain(newData) }
+      set (newData: string) { this.$accessor.updatePhoneMain(newData) }
     },
     phone_other: {
       get (): string { return this.$accessor.phone_other },
-      set (newData) { this.$accessor.updatePhoneOther(newData) }
+      set (newData: string) { this.$accessor.updatePhoneOther(newData) }
     },
     phoneTypesRemaining: {
       get (): object { return this.$accessor.phoneTypesRemaining },
-      set (newData) { this.$accessor.updatePhoneTypesRemaining(newData) }
+      set (newData: object) { this.$accessor.updatePhoneTypesRemaining(newData) }
     },
     phoneTypesSelected: {
       get (): object { return this.$accessor.phoneTypesSelected },
-      set (newData) { this.$accessor.updatePhoneTypesSelected(newData) }
+      set (newData: object) { this.$accessor.updatePhoneTypesSelected(newData) }
     },
     membership: {
       get (): string { return this.$accessor.membership },
-      set (newData) { this.$accessor.updateMembership(newData) }
+      set (newData: string) { this.$accessor.updateMembership(newData) }
     }
   },
+  
   methods: {
-    onPhoneNumberChange: function(inputName: string, value: string) :void {
+    /**
+     * Updates a Phone number of certain type.
+     */
+    onPhoneNumberChange(inputName: string, value: string) :void {
       this[inputName] = value
     },
     
-    closeEditModal: function(): void {
+    /**
+     * Closes the modal where previously entered data was revised.
+     */
+    closeEditModal(): void {
       this.$nuxt.$emit('closeEditModal');
     }
   }

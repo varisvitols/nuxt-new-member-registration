@@ -33,6 +33,7 @@ export default Vue.extend({
       processing
     }
   },
+
   computed: {
     dataList(): object {
       const membership = this.$accessor.membership === '2' ? 'Premium' : 'Regular';
@@ -63,6 +64,7 @@ export default Vue.extend({
       }
     }
   },
+
   methods: {
     openEditModal: function(): void {
       this.$nuxt.$emit('openEditModal');
@@ -97,12 +99,11 @@ export default Vue.extend({
     .data-list__row {
       display: flex;
       flex-direction: row;
-      font: normal normal normal 18px/24px Roboto;
       margin-bottom: 20px;
     }
 
     .data-list__legend {
-      width: 150px;
+      min-width: 150px;
       font-weight: bold;
     }
 

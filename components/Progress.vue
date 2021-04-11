@@ -24,7 +24,7 @@ import Vue from 'vue';
 export default Vue.extend({
   data () {
     const currentRouteName: string = 'index';
-    const pathList: object = {
+    const pathList: { [property: string]: number } = {
       index: 1,
       page2: 2,
       page3: 3
@@ -34,9 +34,9 @@ export default Vue.extend({
       pathList
     }
   },
+
   computed: {
     getCurrentRoute(): number {
-      console.log('route number: ', this.pathList[this.currentRouteName])
       return this.pathList[this.currentRouteName]
     },
     // Could have made progress item as a component,
@@ -58,6 +58,7 @@ export default Vue.extend({
         : (this.getCurrentRoute == 3 ? 'progress__item--active' : '')
     }
   },
+  
   watch: {
     '$route.name': function(routeName){
       this.currentRouteName = routeName

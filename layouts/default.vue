@@ -19,6 +19,7 @@ export default Vue.extend({
       displayModal
     }
   },
+  
   mounted () {
     this.$nuxt.$on('openEditModal', () => {
       this.displayModal = true;

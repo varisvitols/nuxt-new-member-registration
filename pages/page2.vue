@@ -45,7 +45,7 @@ export default Vue.extend({
   computed: {
     membership: {
       get (): string { return this.$accessor.membership },
-      set (newData) { this.$accessor.updateMembership(newData) }
+      set (newData: string) { this.$accessor.updateMembership(newData) }
     },
   }
 })
@@ -59,10 +59,6 @@ export default Vue.extend({
 
     .radio-boxes {
       width: 40%;
-    }
-
-    .membership-description {
-      font: normal normal normal 18px/24px Roboto;
     }
   }
 </style>

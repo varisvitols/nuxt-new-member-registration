@@ -18,17 +18,19 @@ export default Vue.extend({
     'selectedTitle',
     'phoneTypesRemaining'
   ],
+  
   data () {
     return {}
   },
+
   computed: {
     phoneInputValue(){
-      const value = this.$accessor[this.selectedValue];
-      return value
+      return this.$accessor[this.selectedValue];
     },
   },
+
   methods: {
-    onInputKeyUp: function(inputName: string, value: string): void {
+    onInputKeyUp(inputName: string, value: string): void {
       this.$emit('phoneNumberChanged', inputName, value);
     }
   }

@@ -40,17 +40,15 @@ export default Vue.extend({
   },
   computed: {
     phoneInputValue(){
-      const value = this.$accessor[this.selectedValue];
-      return value
+      return this.$accessor[this.selectedValue];
     },
   },
   methods: {
-    onSelecboxValueChange: function(newName: string): void {
-      const oldName = this.selectedValue;
-      this.$emit('phoneTypeChanged', oldName, newName);
+    onSelecboxValueChange(newName: string): void {
+      this.$emit('phoneTypeChanged', this.selectedValue, newName);
     },
 
-    onInputKeyUp: function(inputName: string, value: string): void {
+    onInputKeyUp(inputName: string, value: string): void {
       this.$emit('phoneNumberChanged', inputName, value);
     }
   }
