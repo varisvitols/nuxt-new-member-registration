@@ -40,7 +40,14 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api/': { target: 'https://httpreq.com/square-pond-9x2rp5wl', pathRewrite: {'^/api/': ''} },
+    '/api2/': { target: 'https://httpreq.com/lingering-waterfall-fy6pehvg', pathRewrite: {'^/api/': ''} }
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
