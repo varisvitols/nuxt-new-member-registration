@@ -1,14 +1,7 @@
 import { getAccessorType, mutationTree } from 'typed-vuex';
 
 export const state = () => ({
-  first_name: '' as string,
-  last_name: '' as string,
-  email: '' as string,
-  phone_home: '' as string,
-  phone_work: '' as string,
-  phone_mobile: '' as string,
-  phone_main: '' as string,
-  phone_other: '' as string,
+  personalInfo: '' as string,
   membership: '1' as string,
   phoneTypesRemaining: {
     phone_mobile: 'Mobile',
@@ -24,43 +17,15 @@ export const state = () => ({
 type RootState = ReturnType<typeof state>
 
 export const getters = {
-  first_name: (state: RootState) => state.first_name,
-  last_name: (state: RootState) => state.last_name,
-  email: (state: RootState) => state.email,
-  phone_home: (state: RootState) => state.phone_home,
-  phone_work: (state: RootState) => state.phone_work,
-  phone_mobile: (state: RootState) => state.phone_mobile,
-  phone_main: (state: RootState) => state.phone_main,
-  phone_other: (state: RootState) => state.phone_other,
+  personalInfo: (state: RootState) => state.personalInfo,
   membership: (state: RootState) => state.membership,
   phoneTypesRemaining: (state: RootState) => state.phoneTypesRemaining,
   phoneTypesSelected: (state: RootState) => state.phoneTypesSelected
 }
 
 export const mutations = mutationTree(state, {
-  updateFirstName(state, newData: string) {
-    state.first_name = newData
-  },
-  updateLastName(state, newData: string) {
-    state.last_name = newData
-  },
-  updateEmail(state, newData: string) {
-    state.email = newData
-  },
-  updatePhoneHome(state, newData: string) {
-    state.phone_home = newData
-  },
-  updatePhoneWork(state, newData: string) {
-    state.phone_work = newData
-  },
-  updatePhoneMobile(state, newData: string) {
-    state.phone_mobile = newData
-  },
-  updatePhoneMain(state, newData: string) {
-    state.phone_main = newData
-  },
-  updatePhoneOther(state, newData: string) {
-    state.phone_other = newData
+  updatePersonalInfo(state, newData: string) {
+    state.personalInfo = newData
   },
   updatePhoneTypesRemaining(state, newData: object) {
     state.phoneTypesRemaining = newData

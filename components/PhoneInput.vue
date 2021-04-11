@@ -20,7 +20,7 @@
       <input type="text" 
         :name="selectedValue"
         :value="phoneInputValue"
-        @keyup="onInputKeyUp(selectedValue, $event.target.value)"
+        @blur="onInputBlur(selectedValue, $event.target.value)"
       >
     </div>
   </div>
@@ -33,22 +33,18 @@ export default Vue.extend({
   props: [
     'selectedValue',
     'selectedTitle',
-    'phoneTypesRemaining'
+    'phoneTypesRemaining',
+    'phoneInputValue'
   ],
   data () {
     return {}
-  },
-  computed: {
-    phoneInputValue(){
-      return this.$accessor[this.selectedValue];
-    },
   },
   methods: {
     onSelecboxValueChange(newName: string): void {
       this.$emit('phoneTypeChanged', this.selectedValue, newName);
     },
 
-    onInputKeyUp(inputName: string, value: string): void {
+    onInputBlur(inputName: string, value: string): void {
       this.$emit('phoneNumberChanged', inputName, value);
     }
   }

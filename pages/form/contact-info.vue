@@ -9,7 +9,8 @@
           <input type="text"
             name="first_name" 
             id="first_name" 
-            v-model="first_name"
+            v-model="data.first_name"
+            @blur="onInputBlur"
           >
         </div>
         <div class="input-group">
@@ -17,7 +18,8 @@
           <input type="text"
             name="last_name" 
             id="last_name" 
-            v-model="last_name"
+            v-model="data.last_name"
+            @blur="onInputBlur"
           >
         </div>
         <div class="input-group">
@@ -25,7 +27,8 @@
           <input type="email"
             name="email" 
             id="email" 
-            v-model="email"
+            v-model="data.email"
+            @blur="onInputBlur"
           >
         </div>
         
@@ -34,6 +37,7 @@
             :selectedValue="value"
             :selectedTitle="title"
             :phoneTypesRemaining="phoneTypesRemaining"
+            :phoneInputValue="data[value]"
             @phoneTypeChanged="onPhoneTypeChange"
             @phoneNumberChanged="onPhoneNumberChange"
           />
@@ -57,6 +61,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import PhoneInput from '../../components/PhoneInput.vue';
+import PersonalInfo from '../../types/PersonalInfo';
 
 export default Vue.extend({
   components: {
@@ -64,6 +69,8 @@ export default Vue.extend({
   },
 
   data () {
+    const data: PersonalInfo = {}
+
     const allPhoneTypes: { [property: string]: string } = {
       phone_work: 'Work',
       phone_home: 'Home',
@@ -73,6 +80,7 @@ export default Vue.extend({
     }
 
     return {
+      data,
       allPhoneTypes
     }
   },
@@ -81,37 +89,12 @@ export default Vue.extend({
     phoneTypesRemainingCount(): number {
       return Object.keys(this.phoneTypesRemaining).length
     },
-    first_name: {
-      get (): string { return this.$accessor.first_name },
-      set (newData: string) { this.$accessor.updateFirstName(newData) }
-    },
-    last_name: {
-      get (): string { return this.$accessor.last_name },
-      set (newData: string) { this.$accessor.updateLastName(newData) }
-    },
-    email: {
-      get (): string { return this.$accessor.email },
-      set (newData: string) { this.$accessor.updateEmail(newData) }
-    },
-    phone_work: {
-      get (): string { return this.$accessor.phone_work },
-      set (newData: string) { this.$accessor.updatePhoneWork(newData) }
-    },
-    phone_home: {
-      get (): string { return this.$accessor.phone_home },
-      set (newData: string) { this.$accessor.updatePhoneHome(newData) }
-    },
-    phone_mobile: {
-      get (): string { return this.$accessor.phone_mobile },
-      set (newData: string) { this.$accessor.updatePhoneMobile(newData) }
-    },
-    phone_main: { 
-      get (): string { return this.$accessor.phone_main },
-      set (newData: string) { this.$accessor.updatePhoneMain(newData) }
-    },
-    phone_other: {
-      get (): string { return this.$accessor.phone_other },
-      set (newData: string) { this.$accessor.updatePhoneOther(newData) }
+    getPersonalInfo(): string {
+      if (!! this.$accessor.personalInfo){
+        return JSON.parse(this.$accessor.personalInfo)
+      } else {
+         return ''
+      }
     },
     phoneTypesRemaining: {
       get (): object { return this.$accessor.phoneTypesRemaining },
@@ -123,7 +106,22 @@ export default Vue.extend({
     }
   },
 
+  created(){
+    this.data = { ...this.getPersonalInfo }
+  },
+
   methods: {
+    onInputBlur(): void {
+      this.storePersonalInfo()
+    },
+
+    /**
+     * Save Personal Info data in the store
+     */
+    storePersonalInfo(): void {
+      this.$accessor.updatePersonalInfo(JSON.stringify(this.data));
+    },
+
     /**
      * Executed when a different Phone type is selected 
      * from the select dropdown.
@@ -193,7 +191,8 @@ export default Vue.extend({
      * Updates a Phone number of certain type.
      */
     onPhoneNumberChange(inputName: string, value: string): void {
-      this[inputName] = value
+      this.data[inputName] = value;
+      this.storePersonalInfo()
     }
   }
 })

@@ -7,13 +7,14 @@
           <h1 class="page__heading">Review Your Data</h1>
           
           <section class="page__content">
-            <form class="data-form" action="">
+            <form class="data-form">
               <div class="input-group">
                 <label for="first_name">First name</label>
                 <input type="text"
                   name="first_name" 
                   id="first_name" 
-                  v-model="first_name"
+                  v-model="personalInfo.first_name"
+                  @blur="onInputBlur"
                 >
               </div>
               <div class="input-group">
@@ -21,7 +22,8 @@
                 <input type="text"
                   name="last_name" 
                   id="last_name" 
-                  v-model="last_name"
+                  v-model="personalInfo.last_name"
+                  @blur="onInputBlur"
                 >
               </div>
               <div class="input-group">
@@ -29,7 +31,8 @@
                 <input type="email"
                   name="email" 
                   id="email" 
-                  v-model="email"
+                  v-model="personalInfo.email"
+                  @blur="onInputBlur"
                 >
               </div>
 
@@ -51,6 +54,7 @@
                   :selectedValue="value"
                   :selectedTitle="title"
                   :phoneTypesRemaining="phoneTypesRemaining"
+                  :phoneInputValue="personalInfo[value]"
                   @phoneNumberChanged="onPhoneNumberChange"
                 />
               </div>
@@ -58,7 +62,7 @@
           </section>
 
           <footer class="page__buttons">
-            <button class="button" @click="closeEditModal">Update Data</button>
+            <button class="button" @click="closeEditModal">Update</button>
           </footer>
         </div>
 
@@ -69,80 +73,46 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import PersonalInfo from '../types/PersonalInfo';
 
 export default Vue.extend({
   data () {
     const displayModal: boolean = false;
+    const personalInfo: PersonalInfo = {}
+
     return {
-      displayModal
+      displayModal,
+      personalInfo
     }
   },
 
   computed: {
-    first_name: {
-      get (): string { return this.$accessor.first_name },
-      set (newData: string) { this.$accessor.updateFirstName(newData) }
+    getPersonalInfo(): string {
+      if (!! this.$accessor.personalInfo){
+        return JSON.parse(this.$accessor.personalInfo)
+      } else {
+         return ''
+      }
     },
-    last_name: {
-      get (): string { return this.$accessor.last_name },
-      set (newData: string) { this.$accessor.updateLastName(newData) }
+    phoneTypesRemaining(): { [property: string]: string } {
+      return this.$accessor.phoneTypesRemaining
     },
-    email: {
-      get (): string { return this.$accessor.email },
-      set (newData: string) { this.$accessor.updateEmail(newData) }
-    },
-    phone_work: {
-      get (): string { return this.$accessor.phone_work },
-      set (newData: string) { this.$accessor.updatePhoneWork(newData) }
-    },
-    phone_home: {
-      get (): string { return this.$accessor.phone_home },
-      set (newData: string) { this.$accessor.updatePhoneHome(newData) }
-    },
-    phone_mobile: {
-      get (): string { return this.$accessor.phone_mobile },
-      set (newData: string) { this.$accessor.updatePhoneMobile(newData) }
-    },
-    phone_main: { 
-      get (): string { return this.$accessor.phone_main },
-      set (newData: string) { this.$accessor.updatePhoneMain(newData) }
-    },
-    phone_other: {
-      get (): string { return this.$accessor.phone_other },
-      set (newData: string) { this.$accessor.updatePhoneOther(newData) }
-    },
-    phoneTypesRemaining: {
-      get (): object { return this.$accessor.phoneTypesRemaining },
-      set (newData: object) { this.$accessor.updatePhoneTypesRemaining(newData) }
-    },
-    phoneTypesSelected: {
-      get (): object { return this.$accessor.phoneTypesSelected },
-      set (newData: object) { this.$accessor.updatePhoneTypesSelected(newData) }
+    phoneTypesSelected(): { [property: string]: string } {
+      return this.$accessor.phoneTypesSelected
     },
     membership: {
       get (): string { return this.$accessor.membership },
       set (newData: string) { this.$accessor.updateMembership(newData) }
     }
   },
-  
-  methods: {
-    /**
-     * Updates a Phone number of certain type.
-     */
-    onPhoneNumberChange(inputName: string, value: string) :void {
-      this[inputName] = value
-    },
-    
-    /**
-     * Closes the modal where previously entered data was revised.
-     */
-    closeEditModal(): void {
-      this.$nuxt.$emit('closeEditModal');
-    }
+
+  created(){
+    this.personalInfo = { ...this.getPersonalInfo }
   },
   
   mounted () {
     this.$nuxt.$on('openEditModal', () => {
+      this.refreshPersonalInfo();
       this.displayModal = true;
       document.body.style.overflow = 'hidden';
     }),
@@ -150,6 +120,38 @@ export default Vue.extend({
       this.displayModal = false;
       document.body.style.overflow = '';
     })
+  },
+  
+  methods: {
+    /**
+     * Updates a Phone number of certain type.
+     */
+    onPhoneNumberChange(inputName: string, value: string): void {
+      this.personalInfo[inputName] = value;
+      this.storePersonalInfo()
+    },
+
+    onInputBlur(): void {
+      this.storePersonalInfo()
+    },
+
+    /**
+     * Save Personal Info data in the store
+     */
+    storePersonalInfo(): void {
+      this.$accessor.updatePersonalInfo(JSON.stringify(this.personalInfo));
+    },
+    
+    /**
+     * Closes the modal where previously entered data was revised.
+     */
+    closeEditModal(): void {
+      this.$nuxt.$emit('closeEditModal');
+    },
+
+    refreshPersonalInfo(): void {
+      this.personalInfo = { ...this.getPersonalInfo }
+    }
   }
 })
 </script>

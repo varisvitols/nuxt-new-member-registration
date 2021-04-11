@@ -25,44 +25,65 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import PersonalInfo from '../../types/PersonalInfo';
 
 export default Vue.extend({
   data () {
     const processing: boolean = false;
+    const personalInfo: PersonalInfo = {}
+
     return {
-      processing
+      processing,
+      personalInfo
     }
   },
 
   computed: {
+    getPersonalInfo(): string {
+      if (!! this.$accessor.personalInfo){
+        return JSON.parse(this.$accessor.personalInfo)
+      } else {
+         return ''
+      }
+    },
     dataList(): object {
       const membership = this.$accessor.membership === '2' ? 'Premium' : 'Regular';
       return [
-        { legend: 'First name:', data: this.$accessor.first_name },
-        { legend: 'Last name:', data: this.$accessor.last_name },
-        { legend: 'Email:', data: this.$accessor.email },
+        { legend: 'First name:', data: this.personalInfo.first_name },
+        { legend: 'Last name:', data: this.personalInfo.last_name },
+        { legend: 'Email:', data: this.personalInfo.email },
         { legend: 'Membership:', data: membership },
-        { legend: 'Home Phone:', data: this.$accessor.phone_home },
-        { legend: 'Work Phone:', data: this.$accessor.phone_work },
-        { legend: 'Mobile Phone:', data: this.$accessor.phone_mobile },
-        { legend: 'Main Phone:', data: this.$accessor.phone_main },
-        { legend: 'Other Phone:', data: this.$accessor.phone_other }
+        { legend: 'Home Phone:', data: this.personalInfo.phone_home },
+        { legend: 'Work Phone:', data: this.personalInfo.phone_work },
+        { legend: 'Mobile Phone:', data: this.personalInfo.phone_mobile },
+        { legend: 'Main Phone:', data: this.personalInfo.phone_main },
+        { legend: 'Other Phone:', data: this.personalInfo.phone_other }
       ]
     },
     postData(): object {
       const membership = this.$accessor.membership === '2' ? 'Premium' : 'Regular';
       return {
-        first_name: this.$accessor.first_name,
-        last_name: this.$accessor.last_name,
-        email: this.$accessor.email,
+        first_name: this.personalInfo.first_name,
+        last_name: this.personalInfo.last_name,
+        email: this.personalInfo.email,
         membership,
-        phone_home: this.$accessor.phone_home,
-        phone_work: this.$accessor.phone_work,
-        phone_mobile: this.$accessor.phone_mobile,
-        phone_main: this.$accessor.phone_main,
-        phone_other: this.$accessor.phone_other,
+        phone_home: this.personalInfo.phone_home,
+        phone_work: this.personalInfo.phone_work,
+        phone_mobile: this.personalInfo.phone_mobile,
+        phone_main: this.personalInfo.phone_main,
+        phone_other: this.personalInfo.phone_other,
       }
     }
+  },
+
+  created(){
+    this.personalInfo = { ...this.getPersonalInfo }
+  },
+
+  mounted () {
+    this.$nuxt.$on('closeEditModal', () => {
+      this.personalInfo = { ...this.getPersonalInfo }
+    })
   },
 
   methods: {
