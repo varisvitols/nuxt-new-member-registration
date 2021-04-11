@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal" v-show="displayModal">
     <div class="modal__content-wrapper">
       <div class="modal__content">
 
@@ -72,7 +72,10 @@ import Vue from 'vue';
 
 export default Vue.extend({
   data () {
-    return {}
+    const displayModal: boolean = false;
+    return {
+      displayModal
+    }
   },
 
   computed: {
@@ -136,6 +139,17 @@ export default Vue.extend({
     closeEditModal(): void {
       this.$nuxt.$emit('closeEditModal');
     }
+  },
+  
+  mounted () {
+    this.$nuxt.$on('openEditModal', () => {
+      this.displayModal = true;
+      document.body.style.overflow = 'hidden';
+    }),
+    this.$nuxt.$on('closeEditModal', () => {
+      this.displayModal = false;
+      document.body.style.overflow = '';
+    })
   }
 })
 </script>
