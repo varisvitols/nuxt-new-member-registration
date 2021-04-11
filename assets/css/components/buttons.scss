@@ -22,4 +22,9 @@
     line-height: 60px;
     text-decoration: none;
   }
+
+  &--disabled {
+    background-color: $gray;
+    border-color: $gray;
+  }
 }

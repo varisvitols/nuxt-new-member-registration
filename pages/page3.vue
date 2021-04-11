@@ -18,7 +18,7 @@
     <footer class="page__buttons">
       <!-- <button class="button button--inverse" @click="$router.go(-1)">Back</button> -->
       <NuxtLink class="button  button--nuxtlink  button--inverse" to="/page2">Back</NuxtLink>
-      <button class="button" >Submit</button>
+      <button class="button" @click="onSubmitClick" :class="{ 'button--disabled': processing }">Submit</button>
     </footer>
   </div>
 </template>
@@ -28,7 +28,10 @@ import Vue from 'vue';
 
 export default Vue.extend({
   data () {
-    return {}
+    const processing: boolean = false;
+    return {
+      processing
+    }
   },
   computed: {
     dataList(): object {
@@ -45,10 +48,41 @@ export default Vue.extend({
         { legend: 'Other Phone:', data: this.$accessor.phone_other }
       ]
     },
+    postData(): object {
+      const membership = this.$accessor.membership === '2' ? 'Premium' : 'Regular';
+      return {
+        first_name: this.$accessor.first_name,
+        last_name: this.$accessor.last_name,
+        email: this.$accessor.email,
+        membership,
+        phone_home: this.$accessor.phone_home,
+        phone_work: this.$accessor.phone_work,
+        phone_mobile: this.$accessor.phone_mobile,
+        phone_main: this.$accessor.phone_main,
+        phone_other: this.$accessor.phone_other,
+      }
+    }
   },
   methods: {
     openEditModal: function(): void {
       this.$nuxt.$emit('openEditModal');
+    },
+    async onSubmitClick(): Promise<void> {
+      if (this.processing) {
+        return;
+      }
+
+      this.processing = true;
+
+      try {
+        await this.$axios.$post('/api/record', this.postData);
+        alert('Success!');
+      } catch (error) {
+        console.log(`Axios failed posting to the API with error: ${error}`);
+        alert('Could not post form data right now. Please try again later.');
+      } finally {
+        this.processing = false;
+      }
     }
   }
 })
