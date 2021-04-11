@@ -43,10 +43,10 @@
           />
         </div>
 
-        <a class="link" 
+        <a class="link add-phone" 
           v-if="phoneTypesRemainingCount > 0"
           @click="onAddNewPhoneClick">
-          + Add phone
+          Add phone
         </a>
       </form>
     </section>
