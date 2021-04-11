@@ -1,20 +1,6 @@
-// export interface FormData {
-//   first_name?: string,
-//   last_name?: string,
-//   email?: string,
-//   phone_home?: string,
-//   phone_work?: string,
-//   phone_mobile?: string,
-//   phone_main?: string,
-//   phone_other?: string,
-//   membership?: number
-// }
-
-import { getAccessorType, mutationTree, actionTree } from 'typed-vuex'
-// import { Context } from '@nuxt/types'
+import { getAccessorType, mutationTree } from 'typed-vuex';
 
 export const state = () => ({
-  // formData: {} as FormData,
   first_name: '' as string,
   last_name: '' as string,
   email: '' as string,
@@ -38,7 +24,6 @@ export const state = () => ({
 type RootState = ReturnType<typeof state>
 
 export const getters = {
-  // formData: (state: RootState) => state.formData,
   first_name: (state: RootState) => state.first_name,
   last_name: (state: RootState) => state.last_name,
   email: (state: RootState) => state.email,
@@ -53,10 +38,6 @@ export const getters = {
 }
 
 export const mutations = mutationTree(state, {
-  // setFormData(state, newData: FormData) {
-  //   console.log('updating form data...')
-  //   state.formData = newData
-  // },
   updateFirstName(state, newData: string) {
     state.first_name = newData
   },
