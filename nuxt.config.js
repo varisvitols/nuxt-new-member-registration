@@ -1,25 +1,20 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Nuxt Customer Registration',
+    title: "Nuxt New Member Registration",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "" },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '~/assets/css/main.scss'
-  ],
+  css: ["~/assets/css/main.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -27,36 +22,41 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    'nuxt-typed-vuex'
+    "@nuxt/typescript-build",
+    "nuxt-typed-vuex",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
+    "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    "@nuxtjs/pwa",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true
+    proxy: true,
   },
 
   proxy: {
-    '/api/': { target: 'https://httpreq.com/square-pond-9x2rp5wl', pathRewrite: {'^/api/': ''} },
-    '/api2/': { target: 'https://httpreq.com/lingering-waterfall-fy6pehvg', pathRewrite: {'^/api/': ''} }
+    "/api/": {
+      target: "https://httpreq.com/square-pond-9x2rp5wl",
+      pathRewrite: { "^/api/": "" },
+    },
+    "/api2/": {
+      target: "https://httpreq.com/lingering-waterfall-fy6pehvg",
+      pathRewrite: { "^/api/": "" },
+    },
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: "en",
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
-}
+  build: {},
+};
