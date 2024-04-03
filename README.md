@@ -1,4 +1,4 @@
-# mogo-homework
+# nuxt-new-member-registration
 
 ## Build Setup
 
